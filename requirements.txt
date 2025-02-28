@@ -4,3 +4,4 @@ numpy
 werkzeug
 pymupdf
 gunicorn
+fitz
