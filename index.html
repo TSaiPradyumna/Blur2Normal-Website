@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload & Enhance PDF</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+        input, button {
+            margin: 10px;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Upload Your PDF for Enhancement</h2>
+    <input type="file" id="pdfUpload" accept="application/pdf">
+    <button onclick="uploadPDF()">Upload & Process</button>
+    <p id="message"></p>
+
+    <script>
+        function uploadPDF() {
+            let fileInput = document.getElementById("pdfUpload").files[0];
+            let formData = new FormData();
+            formData.append("file", fileInput);
+
+            fetch("https://your-api.onrender.com/upload", {  // Change to actual backend URL
+                method: "POST",
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("message").innerText = "Enhanced PDF: " + data.url;
+            })
+            .catch(error => console.error("Error:", error));
+        }
+    </script>
+</body>
+</html>
